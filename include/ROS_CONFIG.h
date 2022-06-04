@@ -71,9 +71,9 @@
         //MAKE VARIABLES TO PUBLISHERS
         std_msgs::Float32MultiArray pot_msg;
         std_msgs::Float32MultiArray sensor_msg;
-        std_msgs::Int32MultiArray kp_msg;
-        std_msgs::Int32MultiArray ki_msg;
-        std_msgs::Int32MultiArray kd_msg;
+        std_msgs::Float32MultiArray kp_msg;
+        std_msgs::Float32MultiArray ki_msg;
+        std_msgs::Float32MultiArray kd_msg;
 
         //BUILD PUBLISHER
         ros::Publisher pRobotPot(pPot.c_str(), &pot_msg);

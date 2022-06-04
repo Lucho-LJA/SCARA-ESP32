@@ -139,7 +139,7 @@ void loop()
           pRobotKd.publish(&kd_msg);
 
           if (EmStop==0){
-            if PWM_motor[0]>=0{
+            if (PWM_motor[0]>=0){
               digitalWrite(MOTOR1_IN_A,1);
               digitalWrite(MOTOR1_IN_B,0);
               analogWrite(MOTOR1_PWM,abs(PWM_motor[0]));
@@ -148,7 +148,7 @@ void loop()
               digitalWrite(MOTOR1_IN_B,1);
               analogWrite(MOTOR1_PWM,abs(PWM_motor[0]));
             }
-            if PWM_motor[1]>=0{
+            if (PWM_motor[1]>=0){
               digitalWrite(MOTOR2_IN_A,1);
               digitalWrite(MOTOR2_IN_B,0);
               analogWrite(MOTOR2_PWM,abs(PWM_motor[1]));
@@ -157,7 +157,7 @@ void loop()
               digitalWrite(MOTOR2_IN_B,1);
               analogWrite(MOTOR2_PWM,abs(PWM_motor[1]));
             }
-            if PWM_motor[2]>0{
+            if (PWM_motor[2]>=0){
               digitalWrite(MOTOR3_IN_A,1);
               digitalWrite(MOTOR3_IN_B,0);
               analogWrite(MOTOR3_PWM,abs(PWM_motor[2]));

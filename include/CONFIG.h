@@ -162,7 +162,7 @@
         float kp_motor[N_MOTOR]={MOTOR1_KP,MOTOR2_KP,MOTOR3_KP};
         float ki_motor[N_MOTOR]={MOTOR1_KI,MOTOR2_KI,MOTOR3_KI};
         float kd_motor[N_MOTOR]={MOTOR1_KD,MOTOR2_KD,MOTOR3_KD};
-        #define DT_BOARD = 50; // delay system board in ms
+        #define DT_BOARD 50 // delay system board in ms
         #endif
     #endif
 
