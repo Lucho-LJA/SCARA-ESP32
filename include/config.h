@@ -3,6 +3,27 @@
     #include <Arduino.h>
     #include <string>
     
+    //================DEFAULT CONFIGURATION TO SCARA ROBOT=============================
+    /*
+        ROS CONFIGURATION - COMUNICATION
+        ROBOT_NAME : name of robot to node (It must unique)
+        ROUTER_SSID : SSID of router (Iqual as you see when scan a WiFi)
+        ROUTER_PASSWORD : PASWORD in plain text
+        IP_ESP32 : IP static (you should config a MAC in your Router)
+        IP_GATEWAY : GETWAY of ROUTER
+        IP_SUBNET : SUBNET (The same of router configuration)
+        ROS_SERVER  : IP of machine where run roscore (server)
+        ROS_SERVER_PORT : PORT where run ROS_SERVER (It is configured at ROS_SERVER package)
+    */
+    #define OMNI_N "omni2"
+    #define ROUTER_SSID "INTERNET ALLAUCA"
+    #define ROUTER_PASWORD "2903NUis235689"
+    #define IP_ESP32 192,168,1,152    //Use <,> and not <.> 
+    #define IP_GATEWAY 192,168,1,1    //Use <,> and not <.> 
+    #define IP_SUBNET 255,255,255,0   //Use <,> and not <.> 
+    #define ROS_SERVER 192,168,1,112   //Use <,> and not <.> 
+    #define ROS_SERVER_PORT 11422
+
         //================DEFAULT CONFIGURATION IMU SENSOR=============================
     //uncomment the IMU you're using
     
