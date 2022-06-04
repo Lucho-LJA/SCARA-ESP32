@@ -24,83 +24,73 @@
     const uint16_t serverPort = ROS_SERVER_PORT;
 
     ros::NodeHandle nh;
-    
-    char movimiento='K';
-    char tipo_func='0';
-    int8_t opc=0;
+    #ifdef SCARA_POT_MOSTER 
+        // VARIABLES TO TOPICS
+        String name_robot = ROBOT_NAME;
+        String pPot=name_robot+"/get_pot";
+        String pSensor=name_robot+"/get_sensor";
+        String pKp=name_robot+"/get_kp";
+        String pKi=name_robot+"/get_ki";
+        String pKd=name_robot+"/get_kd";
+        String sAct=name_robot+"/set_actuator";
+        String sPos=name_robot+"/set_position";
+        String sKp=name_robot+"/set_kp";
+        String sKi=name_robot+"/set_ki";
+        String sKd=name_robot+"/set_kd";
+        String sStop=name_robot+"/stop";
 
-    /* VARIABLES TO TOPICS */
-
-    String opc_omni = "omni2";
-    String pRPM=opc_omni+"/rpm";
-    String pMPU=opc_omni+"/mpu";
-    String pSET=opc_omni+"/setpoint";
-    String pPKP=opc_omni+"/pid_kp";
-    String pPKI=opc_omni+"/pid_ki";
-    String pPKD=opc_omni+"/pid_kd";
-    String pMOV=opc_omni+"/movimiento";
-    String pENCO=opc_omni+"/encoder";
-
-
-
-
-    void Lectura_SETPOINT( const std_msgs::Float32MultiArray& msg)
-    {
-        
-        for(int i=0;i<4;i++)
-        {
-            SET_motor[i]=(int) (map(msg.data[i],0,ALL_MOTOR_RPM,0,PWM_MAX));
+        //FUNCTIONS TO SYBSCRIPTORS
+        void ReadSetPoint( const std_msgs::Float32MultiArray& msg){
+            
+            setMotor[0]=(int) (map(msg.data[0],ANGLE_MIN1,ANGLE_MAX1,0,PWM_MAX));
+            setMotor[1]=(int) (map(msg.data[1],ANGLE_MIN2,ANGLE_MAX2,0,PWM_MAX));
+            setMotor[2]=(int) (map(msg.data[2],LONG_MIN3,LONG_MAX3,0,PWM_MAX));
         }
-        
-
-    }
-    void Lectura_KP_PID( const std_msgs::Float32MultiArray& msg)
-    { 
-        for(int i=0;i<4;i++)
-        {
-            kp_motor[i]=msg.data[i];
+        void ReadKp( const std_msgs::Float32MultiArray& msg){
+            for(int i=0;i< N_MOTOR;i++){
+                kp_motor[i]=(int) (msg.data[i]);
+            }
         }
-    }
-
-    void Lectura_KI_PID( const std_msgs::Float32MultiArray& msg)
-    {
-        
-        for(int i=0;i<4;i++)
-        {
-            ki_motor[i]=msg.data[i];
+        void ReadKi( const std_msgs::Float32MultiArray& msg){
+            for(int i=0;i< N_MOTOR;i++){
+                ki_motor[i]=(int) (msg.data[i]);
+            }
         }
-    }
-    
-    void Lectura_KD_PID( const std_msgs::Float32MultiArray& msg)
-    {
-        for(int i=0;i<4;i++)
-        {
-            kd_motor[i]=msg.data[i];
+        void ReadKd( const std_msgs::Float32MultiArray& msg){
+            for(int i=0;i< N_MOTOR;i++){
+                kd_motor[i]=(int) (msg.data[i]);
+            }
         }
-    }
-    
-    void Lectura_mov( const std_msgs::Char& msg)
-    {
-        
-        movimiento=msg.data;
+        void ReadActuator( const std_msgs::Int8& msg){
+            setAct = msg.data;
+        }
+        void ReadStop( const std_msgs::Int8& msg){
+            EmStop = msg.data;
+        }
 
-    }
+        //MAKE VARIABLES TO PUBLISHERS
+        std_msgs::Float32MultiArray pot_msg;
+        std_msgs::Float32MultiArray sensor_msg;
+        std_msgs::Int32MultiArray kp_msg;
+        std_msgs::Int32MultiArray ki_msg;
+        std_msgs::Int32MultiArray kd_msg;
 
-    
-    // Make a chatter publisher
-    std_msgs::Float32MultiArray rpm_msg;
-    std_msgs::Float32MultiArray mpu_msg;
-    std_msgs::Int32MultiArray encoder_msg;
+        //BUILD PUBLISHER
+        ros::Publisher pRobotPot(pPot.c_str(), &pot_msg);
+        ros::Publisher pRobotSensor(pSensor.c_str(), &sensor_msg);
+        ros::Publisher pRobotKp(pKp.c_str(), &kp_msg);
+        ros::Publisher pRobotKi(pKi.c_str(), &ki_msg);
+        ros::Publisher pRobotKd(pKd.c_str(), &kd_msg);
 
-    ros::Publisher omni_rpm(pRPM.c_str(), &rpm_msg);
-    ros::Publisher omni_mpu(pMPU.c_str(), &mpu_msg);
-    ros::Publisher omni_encoder(pENCO.c_str(), &encoder_msg);
-    
-    ros::Subscriber<std_msgs::Float32MultiArray> omni_setpoint(pSET.c_str(),&Lectura_SETPOINT);
-    ros::Subscriber<std_msgs::Float32MultiArray> omni_kp(pPKP.c_str(),&Lectura_KP_PID);
-    ros::Subscriber<std_msgs::Float32MultiArray> omni_ki(pPKI.c_str(),&Lectura_KI_PID);
-    ros::Subscriber<std_msgs::Float32MultiArray> omni_kd(pPKD.c_str(),&Lectura_KD_PID);
-    ros::Subscriber<std_msgs::Char> omni_mov(pMOV.c_str(),&Lectura_mov);
 
+        //BUILD SUBSCRIPTORS
+        ros::Subscriber<std_msgs::Float32MultiArray> sRobotPos(sPos.c_str(),&ReadSetPoint);
+        ros::Subscriber<std_msgs::Int8> sRobotAct(sAct.c_str(),&ReadActuator);
+        ros::Subscriber<std_msgs::Float32MultiArray> sRobotKp(sKp.c_str(),&ReadKp);
+        ros::Subscriber<std_msgs::Float32MultiArray> sRobotKi(sKp.c_str(),&ReadKi);
+        ros::Subscriber<std_msgs::Float32MultiArray> sRobotKd(sKp.c_str(),&ReadKd);
+        ros::Subscriber<std_msgs::Int8> sRobotStop(sStop.c_str(),&ReadActuator);
+
+    #endif
 
 #endif
