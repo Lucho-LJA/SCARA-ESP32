@@ -24,11 +24,7 @@
     #define ROS_SERVER 192,168,1,112   //Use <,> and not <.> 
     #define ROS_SERVER_PORT 11422
 
-     /*
-        GENERAL CONFIGURATION
-        DT_BOARD :delay system board in ms
-     */
-    int dt_board = 50;
+
     /*
         SELECT ROBOT-TYPE
         Uncomment the type of robot following the kind of motor
@@ -55,7 +51,6 @@
     */
     
     #ifdef SCARA_POT_MOSTER
-        #define DEFAULT_VEL 500
 
         #define DEFAULT_POS1 0
         #define DEFAULT_POS2 0
