@@ -1,14 +1,19 @@
 # SCARA-ESP32
 The project is about the code to Control one SCARA with ESP32 and ROS. It is the code of Board, destined to [ESP32 with 38 pins](https://uelectronics.com/producto/esp32-38-pines-esp-wroom-32/) and following the [ESP32 documentation](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/).
-## DESCRIPTION
+
+## GENERAL DESCRIPTION
 The code is used to cominicate with ROS using rosserial_python with ROS distro: Noetic. The project use plataformio framwork and VSCode. All libraries are open source and they have theirs respective licences. This is the first version and only there is one configuration with [Monster Motor Shield](https://content.instructables.com/pdfs/E6E/FQXR/ITUYX4YO/Monster-Motor-Shield-VNH2SP30.pdf) and electromacnetic actuator, however I would like expand to other configurations.
+
+The Scara Robot have 3 degrees of freedom, 2 rotary and 1 linear. So the project use 3 motors with control through potenciometers. The actuator is a electroiman on/of and it have implemented a simple PID control. Also, is used a Monster Motor Shield to two motors, where we read the electric current in order to monitor the motors. 
 
 ## DEPENDECIES
 - Platformio (IDE into VSCode recommended)
 - VSCode (Used it to upload the programe)
 - ESP32 38 pines
 - Monster Motor Shield for 2 motors
-- rosserial_python package(to communication with ROS enviroment)
+- ROS noetic (Ubuntu 20.04)
+- python3
+- rosserial_python package (to communication with ROS enviroment)
 
 ## INSTRUCTIONS
 - Clone this repository with: `git clone https://github.com/Lucho-LJA/SCARA-ESP32.git`
