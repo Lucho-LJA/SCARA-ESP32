@@ -15,20 +15,10 @@
   ESP32AnalogRead pot3;
 #endif
 
-  String ip_board=" ";
-  //Variables MPU
-
-
-
-
-
+String ip_board=" ";
 
 unsigned long prev_time_board=0;
 unsigned long time_board=0;
-
-
-
-
 
 void setup()
 {
@@ -166,7 +156,7 @@ void loop()
               digitalWrite(MOTOR3_IN_B,1);
               analogWrite(MOTOR3_PWM,abs(PWM_motor[2]));
             }
-            if (setAct == 0){
+            if (setAct == 1){
               digitalWrite(PIN_ACTUATOR,1);
             }else{
               digitalWrite(PIN_ACTUATOR,0);

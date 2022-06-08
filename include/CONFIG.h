@@ -16,12 +16,12 @@
         ROS_SERVER_PORT : PORT where run ROS_SERVER (It is configured at ROS_SERVER package)
     */
     #define ROBOT_NAME "scara1"
-    #define ROUTER_SSID "INTERNET ALLAUCA"
-    #define ROUTER_PASWORD "2903NUis235689"
-    #define IP_ESP32 192,168,1,152    //Use <,> and not <.> 
-    #define IP_GATEWAY 192,168,1,1    //Use <,> and not <.> 
+    #define ROUTER_SSID "AndresR_ASUS"
+    #define ROUTER_PASWORD "andres123"
+    #define IP_ESP32 192,168,137,200    //Use <,> and not <.> 
+    #define IP_GATEWAY 192,168,137,1    //Use <,> and not <.> 
     #define IP_SUBNET 255,255,255,0   //Use <,> and not <.> 
-    #define ROS_SERVER 192,168,1,112   //Use <,> and not <.> 
+    #define ROS_SERVER 192,168,137,210   //Use <,> and not <.> 
     #define ROS_SERVER_PORT 11422
 
 
@@ -73,28 +73,28 @@
         //pins of board
         #ifdef ESP32_38P
             //MOTOR_1
-            #define MOTOR1_PWM 13
+            #define MOTOR1_PWM 14
             //#define CHANEL_S1 15   
-            #define MOTOR1_IN_A 14  
-            #define MOTOR1_IN_B 12 
-            #define MOTOR1_AMP 10
-            #define MOTOR1_POT 10
+            #define MOTOR1_IN_A 2  
+            #define MOTOR1_IN_B 0 
+            #define MOTOR1_AMP 34
+            #define MOTOR1_POT 12
             //MOTOR_2
-            #define MOTOR2_PWM 25
+            #define MOTOR2_PWM 27
             //#define CHANEL_S2 14   
-            #define MOTOR2_IN_A 26  
-            #define MOTOR2_IN_B 27
-            #define MOTOR2_AMP 10
-            #define MOTOR2_POT 10 
+            #define MOTOR2_IN_A 15  
+            #define MOTOR2_IN_B 4
+            #define MOTOR2_AMP 35
+            #define MOTOR2_POT 13 
             //MOTOR_3
-            #define MOTOR3_PWM 17
+            #define MOTOR3_PWM 32
             //#define CHANEL_S3 13   
-            #define MOTOR3_IN_A 4  
-            #define MOTOR3_IN_B 16
-            #define MOTOR3_AMP 10
-            #define MOTOR3_POT 10
+            #define MOTOR3_IN_A 26  
+            #define MOTOR3_IN_B 25
+            #define MOTOR3_AMP 39
+            #define MOTOR3_POT 33
             //ACTUATOR
-            #define PIN_ACTUATOR 10
+            #define PIN_ACTUATOR 16
             
         #endif
     #endif
@@ -119,8 +119,6 @@
         #define MOTOR3_KP 1
         #define MOTOR3_KI 0
         #define MOTOR3_KD 0
-         
-        
     #endif
     
 
