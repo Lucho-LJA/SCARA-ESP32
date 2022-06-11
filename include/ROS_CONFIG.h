@@ -27,7 +27,7 @@
     #ifdef SCARA_POT_MOSTER 
         // VARIABLES TO TOPICS
         String name_robot = ROBOT_NAME;
-        String pPot=name_robot+"/get_pot";
+        String pPot=name_robot+"/get_position";
         String pSensor=name_robot+"/get_sensor";
         String pKp=name_robot+"/get_kp";
         String pKi=name_robot+"/get_ki";
@@ -89,7 +89,7 @@
         ros::Subscriber<std_msgs::Float32MultiArray> sRobotKp(sKp.c_str(),&ReadKp);
         ros::Subscriber<std_msgs::Float32MultiArray> sRobotKi(sKp.c_str(),&ReadKi);
         ros::Subscriber<std_msgs::Float32MultiArray> sRobotKd(sKp.c_str(),&ReadKd);
-        ros::Subscriber<std_msgs::Int8> sRobotStop(sStop.c_str(),&ReadActuator);
+        ros::Subscriber<std_msgs::Int8> sRobotStop(sStop.c_str(),&ReadStop);
 
     #endif
 
