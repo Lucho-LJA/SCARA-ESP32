@@ -1,7 +1,14 @@
 #include "CONFIG.h"
 #include "ROS_CONFIG.h"
 #include <string>
-#include "PID_CONTROL.h"
+
+#ifdef PID_CONTROL
+  #include "PID_CONTROL.h"
+#endif
+
+#ifdef ON_OFF_CONTROL
+  #include "ON_OFF_CONTROL.h"
+#endif
 
 #ifdef ESP32_38P
   #include <ESP32_AnalogWrite.h>
@@ -48,23 +55,31 @@ void setup()
     //length to variables of publisher
     pot_msg.data_length=3;
     sensor_msg.data_length=3;
-    kp_msg.data_length=3;
-    ki_msg.data_length=3;
-    kd_msg.data_length=3;
+
+    #ifdef PID_CONTROL
+      kp_msg.data_length=3;
+      ki_msg.data_length=3;
+      kd_msg.data_length=3;
+    #endif
 
     // Start publish
     nh.advertise(pRobotPot);
     nh.advertise(pRobotSensor);
-    nh.advertise(pRobotKp);
-    nh.advertise(pRobotKi);
-    nh.advertise(pRobotKd);
+    #ifdef PID_CONTROL
+      nh.advertise(pRobotKp);
+      nh.advertise(pRobotKi);
+      nh.advertise(pRobotKd);
+    #endif
     //Start subscriptors
     nh.subscribe(sRobotPos);
     nh.subscribe(sRobotAct);
-    nh.subscribe(sRobotKp);
-    nh.subscribe(sRobotKi);
-    nh.subscribe(sRobotKd);
     nh.subscribe(sRobotStop);
+    #ifdef PID_CONTROL
+      nh.subscribe(sRobotKp);
+      nh.subscribe(sRobotKi);
+      nh.subscribe(sRobotKd);
+    #endif
+    
 
     //Config readPIN
     sensor1.attach(MOTOR1_AMP);
@@ -115,8 +130,12 @@ void loop()
     if(time_board-prev_time_board>=DT_BOARD)
     {
       prev_time_board=time_board;
-
-      PIDcompute(PWM_MAX);
+      #ifdef PID_CONTROL
+        PIDcompute(PWM_MAX);
+      #endif
+      #ifdef ON_OFF_CONTROL
+        //OnOffCompute(PWM_MAX);
+      #endif
 
     }
       if (nh.connected()) 
@@ -124,10 +143,11 @@ void loop()
         
           pRobotPot.publish( &pot_msg );
           pRobotSensor.publish( &sensor_msg);
-          pRobotKp.publish(&kp_msg);
-          pRobotKi.publish(&ki_msg);
-          pRobotKd.publish(&kd_msg);
-
+          #ifdef PID_CONTROL
+            pRobotKp.publish(&kp_msg);
+            pRobotKi.publish(&ki_msg);
+            pRobotKd.publish(&kd_msg);
+          #endif
           if (EmStop==0){
             if (PWM_motor[0]>=0){
               digitalWrite(MOTOR1_IN_A,1);
@@ -208,10 +228,11 @@ void loop()
         sensorMotor[1]=sensor2.readVoltage();
         sensorMotor[2]=sensor3.readVoltage();
         sensor_msg.data=sensorMotor;
-
-        kp_msg.data=kp_motor;
-        ki_msg.data=ki_motor;
-        kd_msg.data=kd_motor;
+        #ifdef PID_CONTROL
+          kp_msg.data=kp_motor;
+          ki_msg.data=ki_motor;
+          kd_msg.data=kd_motor;
+        #endif
 
         
         nh.spinOnce();
