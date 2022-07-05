@@ -124,6 +124,7 @@
     #ifdef ON_OFF_CONTROL
         #define TOL_ERROR_ANG 20
         #define TOL_ERROR_LONG 100
+        #define PWM_VEL 500
     #endif
     
 
@@ -148,6 +149,7 @@
         int setAct = 0; //activation of Actuator
         float potMotor[N_MOTOR]={0,0,0};
         float sensorMotor[N_MOTOR]={0,0,0};
+        int med_ang_[N_MOTOR]={0,0,0};
         #define SAMPLE_ANG 1 //Sample min ang
 
     #endif 
