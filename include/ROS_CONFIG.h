@@ -46,21 +46,23 @@
             setMotor[1]=(int) (map(msg.data[1],ANGLE_MIN2,ANGLE_MAX2,0,PWM_MAX));
             setMotor[2]=(int) (map(msg.data[2],LONG_MIN3,LONG_MAX3,0,PWM_MAX));
         }
-        void ReadKp( const std_msgs::Float32MultiArray& msg){
-            for(int i=0;i< N_MOTOR;i++){
-                kp_motor[i]=(int) (msg.data[i]);
+        #ifdef PID_CONTROL
+            void ReadKp( const std_msgs::Float32MultiArray& msg){
+                for(int i=0;i< N_MOTOR;i++){
+                    kp_motor[i]=(int) (msg.data[i]);
+                }
             }
-        }
-        void ReadKi( const std_msgs::Float32MultiArray& msg){
-            for(int i=0;i< N_MOTOR;i++){
-                ki_motor[i]=(int) (msg.data[i]);
+            void ReadKi( const std_msgs::Float32MultiArray& msg){
+                for(int i=0;i< N_MOTOR;i++){
+                    ki_motor[i]=(int) (msg.data[i]);
+                }
             }
-        }
-        void ReadKd( const std_msgs::Float32MultiArray& msg){
-            for(int i=0;i< N_MOTOR;i++){
-                kd_motor[i]=(int) (msg.data[i]);
+            void ReadKd( const std_msgs::Float32MultiArray& msg){
+                for(int i=0;i< N_MOTOR;i++){
+                    kd_motor[i]=(int) (msg.data[i]);
+                }
             }
-        }
+        #endif
         void ReadActuator( const std_msgs::Int8& msg){
             setAct = msg.data;
         }
@@ -71,24 +73,30 @@
         //MAKE VARIABLES TO PUBLISHERS
         std_msgs::Float32MultiArray pot_msg;
         std_msgs::Float32MultiArray sensor_msg;
-        std_msgs::Float32MultiArray kp_msg;
-        std_msgs::Float32MultiArray ki_msg;
-        std_msgs::Float32MultiArray kd_msg;
+        #ifdef PID_CONTROL
+            std_msgs::Float32MultiArray kp_msg;
+            std_msgs::Float32MultiArray ki_msg;
+            std_msgs::Float32MultiArray kd_msg;
+        #endif
 
         //BUILD PUBLISHER
         ros::Publisher pRobotPot(pPot.c_str(), &pot_msg);
         ros::Publisher pRobotSensor(pSensor.c_str(), &sensor_msg);
-        ros::Publisher pRobotKp(pKp.c_str(), &kp_msg);
-        ros::Publisher pRobotKi(pKi.c_str(), &ki_msg);
-        ros::Publisher pRobotKd(pKd.c_str(), &kd_msg);
+        #ifdef PID_CONTROL
+            ros::Publisher pRobotKp(pKp.c_str(), &kp_msg);
+            ros::Publisher pRobotKi(pKi.c_str(), &ki_msg);
+            ros::Publisher pRobotKd(pKd.c_str(), &kd_msg);
+        #endif
 
 
         //BUILD SUBSCRIPTORS
         ros::Subscriber<std_msgs::Float32MultiArray> sRobotPos(sPos.c_str(),&ReadSetPoint);
         ros::Subscriber<std_msgs::Int8> sRobotAct(sAct.c_str(),&ReadActuator);
-        ros::Subscriber<std_msgs::Float32MultiArray> sRobotKp(sKp.c_str(),&ReadKp);
-        ros::Subscriber<std_msgs::Float32MultiArray> sRobotKi(sKp.c_str(),&ReadKi);
-        ros::Subscriber<std_msgs::Float32MultiArray> sRobotKd(sKp.c_str(),&ReadKd);
+        #ifdef PID_CONTROL
+            ros::Subscriber<std_msgs::Float32MultiArray> sRobotKp(sKp.c_str(),&ReadKp);
+            ros::Subscriber<std_msgs::Float32MultiArray> sRobotKi(sKp.c_str(),&ReadKi);
+            ros::Subscriber<std_msgs::Float32MultiArray> sRobotKd(sKp.c_str(),&ReadKd);
+        #endif
         ros::Subscriber<std_msgs::Int8> sRobotStop(sStop.c_str(),&ReadStop);
 
     #endif

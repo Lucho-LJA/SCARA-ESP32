@@ -3,7 +3,7 @@
     #define PID_H
     #include "Arduino.h"
     #include "config.h"
-
+    #ifdef PID_CONTROL
     float integral_[N_MOTOR]={0,0,0};
     float prev_integral_[N_MOTOR]={0,0,0};
     float derivative_[N_MOTOR]={0,0,0};
@@ -56,5 +56,5 @@
             iterPID(pwm_max_,N_MOTOR-1, TOL_ERROR_LONG);
         }
     #endif
-
+    #endif
 #endif

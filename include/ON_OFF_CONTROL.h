@@ -10,7 +10,7 @@
                 int n_motor=0;
             public:
                 ControlScara(int tol_ang_,int tol_dist_, int n_motor_);
-                void compute(int setM[], int medA[], int *pwm[]);
+                uint16_t *compute(int setM[], int medA[], uint16_t pwm[]);
             private:
                 int iter(float error, int tol_);
                 
@@ -34,12 +34,13 @@
             }
         }
 
-        void ControlScara::compute(int setM[], int medA[], int *pwm[]){
+        uint16_t *ControlScara::compute(int setM[], int medA[], uint16_t pwm[]){
             for (int i = 0; i < n_motor-1; i++)
                 {
-                    *pwm[i]=iter((setM[i] - medA[i]), tol_ang);
+                    pwm[i]=iter((setM[i] - medA[i]), tol_ang);
                 }
-                *pwm[n_motor-1]=iter((setM[n_motor-1] - medA[n_motor-1]), tol_dist);
+            pwm[n_motor-1]=iter((setM[n_motor-1] - medA[n_motor-1]), tol_dist);
+            return pwm;
         }
 
     #endif
