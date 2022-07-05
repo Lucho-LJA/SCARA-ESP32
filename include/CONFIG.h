@@ -104,9 +104,9 @@
         INPUT YOUR CONTROL PARAMETRES
         Uncomment the type of control that you want and configure it
     */
-    #define PID_CONTROL //Config PID
-
-    //#define PID_CONTROL
+    //#define PID_CONTROL //Config PID
+    #define ON_OFF_CONTROL //COnfig COntrol ON-PFF
+    
     #ifdef PID_CONTROL
         #define TOL_ERROR_ANG 20
         #define TOL_ERROR_LONG 100
@@ -119,6 +119,11 @@
         #define MOTOR3_KP 1
         #define MOTOR3_KI 0
         #define MOTOR3_KD 0
+    #endif
+
+    #ifdef ON_OFF_CONTROL
+        #define TOL_ERROR_ANG 20
+        #define TOL_ERROR_LONG 100
     #endif
     
 
