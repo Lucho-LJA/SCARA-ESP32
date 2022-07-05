@@ -70,24 +70,24 @@
         #define POT_MIN3 0
         #define POT_MAX3 5
 
-        //pins of board
-        #ifdef ESP32_38P
+                #ifdef ESP32_38P
+
             //MOTOR_1
             #define MOTOR1_PWM 14
             //#define CHANEL_S1 15   
             #define MOTOR1_IN_A 2  
             #define MOTOR1_IN_B 0 
             #define MOTOR1_AMP 34
-            #define MOTOR1_POT 12
+            #define MOTOR1_POT 36
             //MOTOR_2
             #define MOTOR2_PWM 27
             //#define CHANEL_S2 14   
             #define MOTOR2_IN_A 15  
             #define MOTOR2_IN_B 4
             #define MOTOR2_AMP 35
-            #define MOTOR2_POT 13 
+            #define MOTOR2_POT 32 
             //MOTOR_3
-            #define MOTOR3_PWM 32
+            #define MOTOR3_PWM 13
             //#define CHANEL_S3 13   
             #define MOTOR3_IN_A 26  
             #define MOTOR3_IN_B 25
