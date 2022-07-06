@@ -16,8 +16,8 @@
         ROS_SERVER_PORT : PORT where run ROS_SERVER (It is configured at ROS_SERVER package)
     */
     #define ROBOT_NAME "scara1"
-    #define ROUTER_SSID "AndresR_ASUS"
-    #define ROUTER_PASWORD "andres123"
+    #define ROUTER_SSID "NETLIFE"
+    #define ROUTER_PASWORD "NOITA123"
     #define IP_ESP32 192,168,0,200    //Use <,> and not <.> 
     #define IP_GATEWAY 192,168,0,1    //Use <,> and not <.> 
     #define IP_SUBNET 255,255,255,0   //Use <,> and not <.> 
