@@ -124,7 +124,7 @@
     #ifdef ON_OFF_CONTROL
         #define TOL_ERROR_ANG 20
         #define TOL_ERROR_LONG 100
-        #define PWM_VEL 500
+        #define PWM_VEL 1023
     #endif
     
 
