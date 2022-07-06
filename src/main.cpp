@@ -139,14 +139,23 @@ void loop()
       #endif
       #ifdef ON_OFF_CONTROL
         //OnOffCompute(PWM_MAX);
+        Serial.println("SETMOTOR");
+        Serial.println(setMotor[0]);
+        Serial.println(setMotor[1]);
+        Serial.println(setMotor[2]);
+        Serial.println("med_ang_");
+        Serial.println(med_ang_[0]);
+        Serial.println(med_ang_[1]);
+        Serial.println(med_ang_[2]);
         uint16_t *ptnPWM = scara.compute(setMotor, med_ang_, PWM_motor);
-        //Serial.println(ptnPWM[0]);
-        //Serial.println(ptnPWM[1]);
-        //Serial.println(ptnPWM[2]);
-        //Serial.println("DATASSSSS");
-        //Serial.println(PWM_motor[0]);
-        //Serial.println(PWM_motor[1]);
-        //Serial.println(PWM_motor[2]);
+        Serial.println("*ptnPWM");
+        Serial.println(ptnPWM[0]);
+        Serial.println(ptnPWM[1]);
+        Serial.println(ptnPWM[2]);
+        Serial.println("DATASSSSS");
+        Serial.println(PWM_motor[0]);
+        Serial.println(PWM_motor[1]);
+        Serial.println(PWM_motor[2]);
       #endif
 
     }
