@@ -242,11 +242,14 @@ void loop()
         }
 
         potMotor[0]=pot1.readVoltage();
-        med_ang_[0]= map(potMotor[0],POT_MIN1,POT_MAX1,0,PWM_MAX);
+        //med_ang_[0]= map(potMotor[0],POT_MIN1,POT_MAX1,0,PWM_MAX);
+        med_ang_[0]= potMotor[0];
         potMotor[1]=pot2.readVoltage();
-        med_ang_[1]= map(potMotor[1],POT_MIN2,POT_MAX2,0,PWM_MAX);
+        //med_ang_[1]= map(potMotor[1],POT_MIN2,POT_MAX2,0,PWM_MAX);
+        med_ang_[1]= potMotor[1];
         potMotor[2]=pot3.readVoltage();
-        med_ang_[2]= map(potMotor[2],POT_MIN3,POT_MAX3,0,PWM_MAX);
+        //med_ang_[2]= map(potMotor[2],POT_MIN3,POT_MAX3,0,PWM_MAX);
+        med_ang_[2]= potMotor[2];
         pot_msg.data=potMotor;
 
         sensorMotor[0]=sensor1.readVoltage();

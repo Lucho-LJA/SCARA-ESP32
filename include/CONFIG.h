@@ -18,11 +18,11 @@
     #define ROBOT_NAME "scara1"
     #define ROUTER_SSID "AndresR_ASUS"
     #define ROUTER_PASWORD "andres123"
-    #define IP_ESP32 192,168,137,200    //Use <,> and not <.> 
-    #define IP_GATEWAY 192,168,137,1    //Use <,> and not <.> 
+    #define IP_ESP32 192,168,0,200    //Use <,> and not <.> 
+    #define IP_GATEWAY 192,168,0,1    //Use <,> and not <.> 
     #define IP_SUBNET 255,255,255,0   //Use <,> and not <.> 
-    #define ROS_SERVER 192,168,137,210   //Use <,> and not <.> 
-    #define ROS_SERVER_PORT 11422
+    #define ROS_SERVER 192,168,0,197   //Use <,> and not <.> 
+    #define ROS_SERVER_PORT 11411
 
 
     /*
@@ -145,7 +145,7 @@
     #ifdef SCARA_POT_MOSTER
         //Variables to control
         #define N_MOTOR 3 //number of motors
-        int setMotor[N_MOTOR]={DEFAULT_POS1,DEFAULT_POS2,DEFAULT_POS3}; //setpoint of motors position
+        float setMotor[N_MOTOR]={DEFAULT_POS1,DEFAULT_POS2,DEFAULT_POS3}; //setpoint of motors position
         int setAct = 0; //activation of Actuator
         float potMotor[N_MOTOR]={0,0,0};
         float sensorMotor[N_MOTOR]={0,0,0};

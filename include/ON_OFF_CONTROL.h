@@ -5,24 +5,24 @@
     #ifdef SCARA_POT_MOSTER 
         class ControlScara {
             private:
-                int tol_ang=0;
-                int tol_dist=0;
+                float tol_ang=0;
+                float tol_dist=0;
                 int n_motor=0;
             public:
-                ControlScara(int tol_ang_,int tol_dist_, int n_motor_);
-                uint16_t *compute(int setM[], int medA[], uint16_t pwm[]);
+                ControlScara(float tol_ang_,float tol_dist_, int n_motor_);
+                uint16_t *compute(float setM[], float medA[], uint16_t pwm[]);
             private:
-                int iter(float error, int tol_);
+                int iter(float error, float tol_);
                 
         };
         
-        ControlScara::ControlScara(int tol_ang_, int tol_dist_, int n_motor_){
+        ControlScara::ControlScara(float tol_ang_, float tol_dist_, int n_motor_){
             tol_ang = tol_ang_;
             tol_dist = tol_dist_;
             n_motor = n_motor_;
         }
 
-        int ControlScara::iter(float error, int tol_){
+        int ControlScara::iter(float error, float tol_){
             if (abs(error) >= tol_){
                 if (error>0){
                     return 1;
@@ -34,7 +34,7 @@
             }
         }
 
-        uint16_t *ControlScara::compute(int setM[], int medA[], uint16_t pwm[]){
+        uint16_t *ControlScara::compute(float setM[], float medA[], uint16_t pwm[]){
             for (int i = 0; i < n_motor-1; i++)
                 {
                     pwm[i]=iter((setM[i] - medA[i]), tol_ang);

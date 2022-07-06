@@ -1,6 +1,6 @@
 #ifndef _ROS_CONFIG_
     #define _ROS_CONFIG_
-    #include "config.h"
+    #include "CONFIG.h"
     #include "Arduino.h"
     #include "ros.h"
     #include "std_msgs/String.h"
@@ -42,9 +42,9 @@
         //FUNCTIONS TO SYBSCRIPTORS
         void ReadSetPoint( const std_msgs::Float32MultiArray& msg){
             
-            setMotor[0]=(int) (map(msg.data[0],ANGLE_MIN1,ANGLE_MAX1,0,PWM_MAX));
-            setMotor[1]=(int) (map(msg.data[1],ANGLE_MIN2,ANGLE_MAX2,0,PWM_MAX));
-            setMotor[2]=(int) (map(msg.data[2],LONG_MIN3,LONG_MAX3,0,PWM_MAX));
+            setMotor[0]= (3.184-0.01299*msg.data[0]);
+            setMotor[1]= (3.184-0.01299*msg.data[1]);
+            setMotor[2]= (3.184-0.01299*msg.data[2]);
         }
         #ifdef PID_CONTROL
             void ReadKp( const std_msgs::Float32MultiArray& msg){
