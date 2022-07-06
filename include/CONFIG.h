@@ -149,7 +149,7 @@
         int setAct = 0; //activation of Actuator
         float potMotor[N_MOTOR]={0,0,0};
         float sensorMotor[N_MOTOR]={0,0,0};
-        int med_ang_[N_MOTOR]={0,0,0};
+        float med_ang_[N_MOTOR]={0,0,0};
         #define SAMPLE_ANG 1 //Sample min ang
 
     #endif 
