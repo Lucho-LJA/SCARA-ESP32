@@ -200,10 +200,6 @@ void loop()
               analogWrite(MOTOR1_PWM,PWM_VEL);
               analogWrite(MOTOR2_PWM,PWM_VEL);
               analogWrite(MOTOR3_PWM,PWM_VEL);
-              Serial.println("PWM");
-              Serial.println(PWM_motor[0]);
-              Serial.println(PWM_motor[1]);
-              Serial.println(PWM_motor[2]);
             #endif
             if (setAct == 1){
               digitalWrite(PIN_ACTUATOR,1);
@@ -259,6 +255,10 @@ void loop()
         Serial.println(potMotor[0]);
         Serial.println(potMotor[1]);
         Serial.println(potMotor[2]);
+        Serial.println("PWM");
+        Serial.println(PWM_motor[0]);
+        Serial.println(PWM_motor[1]);
+        Serial.println(PWM_motor[2]);
         sensorMotor[0]=sensor1.readVoltage();
         sensorMotor[1]=sensor2.readVoltage();
         sensorMotor[2]=sensor3.readVoltage();
