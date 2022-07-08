@@ -68,4 +68,15 @@ The Scara Robot have 3 degrees of freedom, 2 rotary and 1 linear. So the project
 - Now, the "serial_node" node is running and if the ESP32 is running too, then the server will recognize it automatically.
 - In order to check the communication, run the command `rostopic list` in other terminal and you will can see the topics, that they was created for the ESP32. 
 
-
+## Common issues
+There are some issues indepedence of configuration and some of them are:
+- Error: [99-platformio-udev.rules in Linux](https://docs.platformio.org/en/latest/core/installation/udev-rules.html)
+```bash
+curl -fsSL https://raw.githubusercontent.com/platformio/platformio-core/master/scripts/99-platformio-udev.rules | sudo tee /etc/udev/rules.d/99-platformio-udev.rules
+sudo service udev restart
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+- Change Monitor serial of platformio
+    - Go to file: `platformio.ini`
+    - Choose a enviroment and add: `monitor_speed = 115200` 

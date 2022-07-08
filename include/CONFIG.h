@@ -52,9 +52,9 @@
     
     #ifdef SCARA_POT_MOSTER
 
-        #define DEFAULT_POS1 0
-        #define DEFAULT_POS2 0
-        #define DEFAULT_POS3 0
+        #define DEFAULT_POS1 3.18
+        #define DEFAULT_POS2 3.18
+        #define DEFAULT_POS3 3.18
 
         #define ANGLE_MIN1 0
         #define ANGLE_MAX1 180
@@ -122,8 +122,8 @@
     #endif
 
     #ifdef ON_OFF_CONTROL
-        #define TOL_ERROR_ANG 20
-        #define TOL_ERROR_LONG 100
+        #define TOL_ERROR_ANG 0.15
+        #define TOL_ERROR_LONG 0.15
         #define PWM_VEL 1023
     #endif
     
@@ -158,7 +158,7 @@
     
     #ifdef PID_CONTROL
         #ifdef SCARA_POT_MOSTER
-            uint16_t PWM_motor[N_MOTOR]={0,0,0};
+            int PWM_motor[N_MOTOR]={0,0,0};
             float kp_motor[N_MOTOR]={MOTOR1_KP,MOTOR2_KP,MOTOR3_KP};
             float ki_motor[N_MOTOR]={MOTOR1_KI,MOTOR2_KI,MOTOR3_KI};
             float kd_motor[N_MOTOR]={MOTOR1_KD,MOTOR2_KD,MOTOR3_KD};
@@ -167,7 +167,7 @@
     #endif
     #ifdef ON_OFF_CONTROL
         #ifdef SCARA_POT_MOSTER
-            uint16_t PWM_motor[N_MOTOR]={0,0,0};
+            int PWM_motor[N_MOTOR]={0,0,0};
             #define DT_BOARD 50 // delay system board in ms
         #endif
     #endif

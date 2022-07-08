@@ -147,7 +147,7 @@ void loop()
         Serial.println(med_ang_[0]);
         Serial.println(med_ang_[1]);
         Serial.println(med_ang_[2]);
-        uint16_t *ptnPWM = scara.compute(setMotor, med_ang_, PWM_motor);
+        int *ptnPWM = scara.compute(setMotor, med_ang_, PWM_motor);
         Serial.println("*ptnPWM");
         Serial.println(ptnPWM[0]);
         Serial.println(ptnPWM[1]);
@@ -206,9 +206,21 @@ void loop()
               analogWrite(MOTOR3_PWM,abs(PWM_motor[2]));
             #endif
             #ifdef ON_OFF_CONTROL
-              analogWrite(MOTOR1_PWM,PWM_VEL);
-              analogWrite(MOTOR2_PWM,PWM_VEL);
-              analogWrite(MOTOR3_PWM,PWM_VEL);
+              if (PWM_motor[0]==0){
+                analogWrite(MOTOR1_PWM,0);
+              }else{
+                analogWrite(MOTOR1_PWM,PWM_VEL);
+              }
+              if (PWM_motor[1]==0){
+                analogWrite(MOTOR2_PWM,0);
+              }else{
+                analogWrite(MOTOR2_PWM,PWM_VEL);
+              }
+              if (PWM_motor[2]==0){
+                analogWrite(MOTOR3_PWM,0);
+              }else{
+                analogWrite(MOTOR3_PWM,PWM_VEL);
+              }
             #endif
             if (setAct == 1){
               digitalWrite(PIN_ACTUATOR,1);
